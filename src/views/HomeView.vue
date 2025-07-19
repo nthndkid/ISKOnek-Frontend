@@ -10,7 +10,7 @@
 
         <v-btn
           v-for="link in links"
-          :key="link"
+          :key="link" 
           :text="link"
           variant="text"
         ></v-btn>
