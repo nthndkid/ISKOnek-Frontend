@@ -16,8 +16,9 @@
           Welcome back! Please enter your credentials.
         </v-card-subtitle>
 
-        <v-form>
+        <v-form @submit.prevent="login">
           <v-text-field
+            v-model="form.fullname"
             label="Full Name"
             type="text"
             variant="outlined"
@@ -26,6 +27,7 @@
             </v-text-field>
 
           <v-text-field
+            v-model="form.username"
             label="Username"
             type="text"
             variant="outlined"
@@ -81,20 +83,22 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const form = ref({
-  name: '',
+  fullname: '',
   username: ''
 })
 
 const login = () => {
-  if (!form.value.name || !form.value.username) {
+  if (!form.value.fullname || !form.value.username) {
     alert('Please fill in both fields.')
     return
   }
 
-  // Save to localStorage (mock auth)
-  localStorage.setItem('user', JSON.stringify(form.value))
+  console.log(form.value)
+
+//   // Save to localStorage (mock auth)
+//   localStorage.setItem('user', JSON.stringify(form.value))
 
   // Navigate to dashboard
-  router.push('/dashboard')
+  router.push('/home')
 }
 </script>
