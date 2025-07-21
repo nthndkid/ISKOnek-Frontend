@@ -1,20 +1,27 @@
 <template>
-    <v-card elevation="0" class="pa-2" max-width="1000">
+    <v-card elevation="0" class="pa-2" max-width="500" width="100%">
         <v-img
-            src="https://cdn.vuetifyjs.com/docs/images/brand-kit/v-logo.png"
+            :src="Logo"
             alt="Logo"
-            max-width="120"
+            max-width="190"
             class="mx-auto mb-4"
             contain
         ></v-img>
         
-        <v-card-title class="text-h5 font-weight-regular">
-          Login to your account
+        <!-- For desktop -->
+        <v-card-title
+          class="text-h6 mb-4 text-center font-weight-regular d-none d-sm-block"
+        >
+          Your network of fellow Iskolars begins here.
         </v-card-title>
 
-        <v-card-subtitle class="text-body-2 mb-4">
-          Welcome back! Please enter your credentials.
-        </v-card-subtitle>
+        <!-- For mobile -->
+        <v-card-title
+          class="text-body-2 mb-4 text-center font-weight-regular d-sm-none"
+        >
+          Your network of fellow Iskolars begins here.
+        </v-card-title>
+
 
         <v-form @submit.prevent="login">
           <v-text-field
@@ -22,6 +29,7 @@
             label="Full Name"
             type="text"
             variant="outlined"
+            rounded="lg"  
             class="mb-2"
             require>
             </v-text-field>
@@ -31,15 +39,16 @@
             label="Username"
             type="text"
             variant="outlined"
+            rounded="lg"  
             class="mb-2"
             required>
         </v-text-field>
 
           <v-btn
-            color="primary"
+            color="red-darken-3"
             block
             rounded="lg"
-            size="large"
+            size="x-large"
             class="text-none"
             type="submit">
             Login
@@ -80,6 +89,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import Logo from '../components/icons/iskonek.svg'
 
 const router = useRouter()
 const form = ref({
