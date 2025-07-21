@@ -25,16 +25,6 @@
 
         <v-form @submit.prevent="login">
           <v-text-field
-            v-model="form.fullname"
-            label="Full Name"
-            type="text"
-            variant="outlined"
-            rounded="lg"  
-            class="mb-2"
-            require>
-            </v-text-field>
-
-          <v-text-field
             v-model="form.username"
             label="Username"
             type="text"
@@ -42,7 +32,17 @@
             rounded="lg"  
             class="mb-2"
             required>
-        </v-text-field>
+          </v-text-field>
+
+          <v-text-field
+            v-model="form.student_id"
+            label="PUP Student ID"
+            type="text"
+            variant="outlined"
+            rounded="lg"  
+            class="mb-2"
+            require>
+            </v-text-field>
 
           <v-btn
             color="red-darken-3"
@@ -93,12 +93,12 @@ import Logo from '../components/icons/iskonek.svg'
 
 const router = useRouter()
 const form = ref({
-  fullname: '',
-  username: ''
+  username: '',
+  student_id: ''
 })
 
 const login = () => {
-  if (!form.value.fullname || !form.value.username) {
+  if (!form.value.student_id || !form.value.username) {
     alert('Please fill in both fields.')
     return
   }

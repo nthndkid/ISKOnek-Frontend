@@ -71,11 +71,11 @@ function goBack() {
                 block
                 stacked
                 elevation="0"
-                height="120"
-                style="min-width: 60%"
+                height="100"
+                style="min-width: 30%;"
             >
                 <span class="text-h3">{{ mood.emoji }}</span>
-                <span class="text-h6 mt-1 text-capitalize">{{ mood.mood }}</span>
+                <span class="text-body-1 mt-1 text-capitalize">{{ mood.mood }}</span>
             </v-btn>
             </v-col>
         </v-row>

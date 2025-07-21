@@ -1,52 +1,53 @@
 <template>
-  <v-app-bar flat>
-    <v-container class="mx-auto d-flex align-center justify-space-between">
-      
-      <!-- Left: Avatar and Navigation -->
-      <div class="d-flex align-center">
-        <v-avatar class="me-4" color="grey-darken-1" size="32"></v-avatar>
+  <v-container>
+    <v-app-bar app color="white" class="px-10 py-2" dark>
+      <!-- Logo Left -->
+      <v-toolbar-title class="text-h6 font-weight-bold">
+        <img :src="Logo" alt="Logo" height="32" class="mr-2" />
+      </v-toolbar-title>
 
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          :text="link"
-          variant="text"
-        ></v-btn>
-      </div>
+      <v-spacer></v-spacer>
 
-      <!-- Right: Search Field -->
-      <v-responsive max-width="160">
-        <v-text-field
-          density="compact"
-          label="Search"
-          rounded="lg"
-          variant="solo-filled"
-          flat
-          hide-details
-          single-line
-        ></v-text-field>
-      </v-responsive>
-      
-    </v-container>
-  </v-app-bar>
+      <!-- Nav Links -->
+      <v-btn text to="/">Home</v-btn>
+      <v-btn text to="/match">Match</v-btn>
 
-  <v-app-bar :elevation="0">
-  <template v-slot:prepend>
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
-  </template>
+      <!-- Profile Dropdown -->
+      <v-menu>
+        <template #activator="{ props }">
+          <v-btn v-bind="props" icon>
+            <v-avatar size="32">
+              <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Profile" />
+            </v-avatar>
+          </v-btn>
+        </template>
 
-  <v-app-bar-title>Application Bar</v-app-bar-title>
-
-  <template v-slot:append>
-    <v-btn icon="mdi-heart"></v-btn>
-
-    <v-btn icon="mdi-magnify"></v-btn>
-
-    <v-btn icon="mdi-dots-vertical"></v-btn>
-  </template>
-</v-app-bar>
+        <v-list>
+          <v-list-item @click="logout">
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-app-bar>
+  </v-container>
 </template>
 
 <script setup>
-const links = ['Home', 'Messages', 'Explore']
+import { useRouter } from 'vue-router'
+import Logo from '../components/icons/iskonek.svg'
+
+const router = useRouter()
+
+function logout() {
+  // Simulate logout
+  alert('Logged out!')
+  router.push('/login')
+}
 </script>
+
+<style scoped>
+/* Optional: make logo responsive */
+img {
+  max-height: 32px;
+}
+</style>

@@ -5,7 +5,7 @@ import MoodForm from './Forms/MoodForm.vue'
 const step = ref(1)
 
 const form = reactive({
-    mood: [],
+    mood: null,
     interests: [],
     goal: null
 })
@@ -13,11 +13,11 @@ const form = reactive({
 
 <template>
         <v-card 
-            max-width="1000" 
+            max-width="800" 
             width="100%" 
             elevation="1"
             rounded="xl"
-            class="mx-auto pa-4 border border-opacity-05 border-grey-lighten-2"
+            class="mx-auto py-6 px-4 border border-opacity-05 border-grey-lighten-2"
         >
             <div>
                 <MoodForm :form="form"/>
@@ -26,12 +26,12 @@ const form = reactive({
             <v-row justify="center" class="mb-6 px-6 px-md-12">
                 <v-col cols="12" md="12" class="text-center">
                     <v-btn 
-                    color="red-accent-4" 
+                    color="red-darken-3" 
                     rounded="lg" 
                     size="large" 
                     block
                     @click="nextStep"
-                    >
+                    >   
                     Next
                     </v-btn>
                 </v-col>
