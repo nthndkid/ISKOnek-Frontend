@@ -2,6 +2,7 @@
 import { ref, reactive, computed } from 'vue'
 import MoodForm from './Forms/MoodForm.vue'
 import InterestForm from './Forms/InterestForm.vue'
+import GoalForm from './Forms/GoalForm.vue'
 
 const step = ref(1)
 
@@ -28,6 +29,10 @@ const form = reactive({
                 <InterestForm :form="form"/>
             </div>
 
+            <div v-else-if="step === 3">
+                <GoalForm :form="form"/>
+            </div>
+
             <v-row justify="center" class="mb-6 px-6 px-md-12">
                 <v-col cols="12" md="12" class="text-center">
                     <v-btn 
@@ -37,7 +42,7 @@ const form = reactive({
                         block
                         @click="step === 3 ? submit() : step++"
                     >   
-                        {{ step === 3 ? 'Submit' : 'Next' }}
+                        {{ step === 3 ? 'Find Match' : 'Next' }}
                     </v-btn>
                 </v-col>
             </v-row>

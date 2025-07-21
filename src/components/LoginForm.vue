@@ -51,7 +51,7 @@
             size="x-large"
             class="text-none"
             type="submit">
-            Login
+            Get Started
           </v-btn>
         </v-form>
 

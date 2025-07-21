@@ -7,31 +7,23 @@ const props = defineProps({
 
 const router = useRouter()
 
-const moods = [
-  { id: 1, mood: 'happy', emoji: '😄' },
-  { id: 2, mood: 'sad', emoji: '😢' },
-  { id: 3, mood: 'excited', emoji: '🤩' },
-  { id: 4, mood: 'calm', emoji: '😌' },
-  { id: 5, mood: 'sleepy', emoji: '😪' },
-  { id: 6, mood: 'angry', emoji: '😠' },
-  { id: 7, mood: 'stressed', emoji: '😫' },
-  { id: 8, mood: 'tired', emoji: '😴' },
-  { id: 9, mood: 'motivated', emoji: '🔥' },
-  { id: 10, mood: 'anxious', emoji: '😰' },
-  { id: 11, mood: 'bored', emoji: '🥱' },
-  { id: 12, mood: 'lonely', emoji: '😔' },
+const goals = [
+  { id: 1, goal: 'find a study partner', emoji: '📚' },
+  { id: 2, goal: 'find a gaming buddy', emoji: '🎮' },
+  { id: 3, goal: 'someone willing to listen', emoji: '👂' },
+  { id: 4, goal: 'just want to explore', emoji: '🧭' },
+  { id: 5, goal: 'collaborate on ideas or projects', emoji: '🤝' },
+  { id: 6, goal: 'explore internship or career ideas', emoji: '💼' },
+  { id: 7, goal: 'share academic tips/resources', emoji: '📝' },
+  { id: 8, goal: 'practice public speaking or performance', emoji: '🎤' },
+  { id: 9, goal: 'make new friends', emoji: '🫂' },
+  { id: 10, goal: 'improve communication skills', emoji: '🗣️' },
+  { id: 11, goal: 'get peer support or advice', emoji: '💬' },
+  { id: 12, goal: 'network for future opportunities', emoji: '🌐' },
+  { id: 13, goal: 'join or start a club/group', emoji: '🏫' },
+  { id: 14, goal: 'build a startup or passion project', emoji: '🚀' }
 ];
 
-
-
-function toggle(id){
-    const index = props.form.moods.indexOf(id)
-    if(index === -1){
-        props.form.moods.push(id)
-    } else {
-        props.form.moods.splice(index, 1)
-    }
-}
 
 function goBack() {
   router.back()
@@ -52,35 +44,42 @@ function goBack() {
 
             <!-- Title -->
             <v-col>
-            <h1 class="text-h5 text-md-h4 text-center text-md-start">
-                What is your mood today?
-            </h1>
+                <span class="text-body-1 text-md-body-1 d-block mx-auto text-start">
+                    Let’s Get You Matched
+                </span>
+
+                <h1 class="text-h5 text-md-h4 text-start my-4">
+                    What’s Your Goal?
+                </h1>
+
+                <span class="text-body-2 text-md-body-2 d-block mx-auto text-start">
+                    This helps us match you with people who share your vibe.
+                </span>
             </v-col>
         </v-row>
 
         <!-- Mood Buttons -->
         <v-row class="g-4">
             <v-col
-            v-for="mood in moods"
-            :key="mood.id"
+            v-for="goal in goals"
+            :key="goal.id"
             cols="6"
-            md="2"
+            md="6"
             class="d-flex justify-center"
             >
             <v-btn
-                :color="form.moods === mood.id ? 'red-lighten-5' : 'grey-lighten-3'"
+                :color="form.goals === goal.id ? 'red-lighten-5' : 'grey-lighten-3'"
                 class="py-6 px-2 d-flex flex-column align-center text-center"
-                @click="form.moods = mood.id"
-                rounded="lg"
+                @click="form.goals = goal.id"
+                rounded="xl"
                 block
-                stacked
                 elevation="0"
-                height="100"
+                height="40"
                 style="min-width: 30%;"
-                :style="form.moods === mood.id ? 'border: 1px solid #f28b82;' : 'border: 1px solid transparent;'"
+                :style="form.goals === goal.id ? 'border: 1px solid #f28b82;' : 'border: 1px solid transparent;'"
             >
-                <span class="text-h3">{{ mood.emoji }}</span>
-                <span class="text-body-1 mt-1 text-capitalize">{{ mood.mood }}</span>
+                <span class="text-h6">{{ goal.emoji }}</span>
+                <span class="text-body-1 mt-1 text-capitalize">{{ goal.goal }}</span>
             </v-btn>
             </v-col>
         </v-row>

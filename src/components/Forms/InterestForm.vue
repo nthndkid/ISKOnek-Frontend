@@ -56,9 +56,10 @@ function goBack() {
 
             <!-- Title -->
             <v-col>
-            <h1 class="text-h5 text-md-h4 text-center text-md-start">
-                Select your Interest
-            </h1>
+                <h1 class="text-h5 text-md-h4 text-center text-md-start">
+                    Select your Interest
+                </h1>
+                <p class="text-subtitle-1 text-md-subtitle-1 text-center text-md-start mb-2">Let us know what excites you — select as many as you like.</p>
             </v-col>
         </v-row>
 
