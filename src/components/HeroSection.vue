@@ -1,5 +1,12 @@
 <script setup>
 import Logo from '../components/icons/iskonek.svg'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const startPreMatch = () => {
+    router.push('/pre-match')
+}
 </script>
 
 <template>
@@ -29,7 +36,7 @@ import Logo from '../components/icons/iskonek.svg'
       size="x-large"
       rounded="pill"
       class="text-white mt-6 px-12 hover-scale"
-      @click="submitForm"
+      @click="startPreMatch"
     >
       Get Started
       <v-icon right>mdi-arrow-right</v-icon>

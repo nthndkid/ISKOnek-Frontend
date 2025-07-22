@@ -1,11 +1,24 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { formOptions } from '../../data/formOptions'
-import { computed } from 'vue'
+import { computed, toRaw } from 'vue'
+import { useMatchStore } from '../../stores/matchStore'
+
+const emit = defineEmits(['back'])
+
+const store = useMatchStore()
+
+const router = useRouter()
 
 const props = defineProps({
     form: Object
 })
+
+const findMatch = () => {
+    console.log("Form Data Being Passed:", props.form)
+    store.setForm({...toRaw(props.form)})
+    router.push('/matching')
+}
 
 const { moods, interests, goals } = formOptions()
 
@@ -24,9 +37,6 @@ const selectedInterests = computed(() => {
   return interests.value.filter(i => props.form.interests.includes(i.id))
 })
 
-const emit = defineEmits(['back'])
-
-const router = useRouter()
 
 const user = {
   name: '@iskoako',
@@ -116,7 +126,7 @@ const user = {
                     elevation="4"
                     block
                     class="mb-6 py-7 px-6 text-white hover-scale"
-                    @click="submitForm"
+                    @click="findMatch"
                 >
                     Find Match
                 </v-btn>

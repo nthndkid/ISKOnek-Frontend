@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import MatchView from '../views/MatchView.vue'
+import MatchFindingView from '../views/MatchFindingView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/pre-match',
       name: 'prematch',
       component: MatchView,
+    },
+    {
+      path: '/matching',
+      name: 'matching',
+      component: MatchFindingView,
     },
   ],
 })

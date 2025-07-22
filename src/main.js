@@ -13,6 +13,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { createPinia } from 'pinia'
 
 const app = createApp(App)
 
@@ -28,6 +29,9 @@ const vuetify = createVuetify({
   },
 })
 
+const pinia = createPinia()
+
+app.use(pinia)
 app.use(vuetify)
 app.use(router) 
 app.mount('#app')
