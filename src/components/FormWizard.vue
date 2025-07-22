@@ -36,7 +36,7 @@ const submitForm = () => {
         <v-card 
             max-width="950" 
             width="100%" 
-            elevation="1"
+            elevation="2"
             rounded="xl"
             class="mx-auto py-6 px-4 border border-opacity-05 border-grey-lighten-2"
         >

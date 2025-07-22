@@ -50,7 +50,7 @@ function goBack() {
             <v-col
             v-for="goal in goals"
             :key="goal.id"
-            cols="6"
+            cols="12"
             md="6"
             class="d-flex justify-center"
             >
@@ -65,11 +65,22 @@ function goBack() {
                 style="min-width: 30%;"
                 :style="form.goals === goal.id ? 'border: 1px solid #f28b82;' : 'border: 1px solid transparent;'"
             >
-                <span class="text-h6">{{ goal.emoji }}</span>
-                <span class="text-body-1 mt-1 text-capitalize">{{ goal.goal }}</span>
+                <span class="text-h6 text-sm-h5 text-md-h5">{{ goal.emoji }}</span>
+                <span class="text-capitalize text-body-1 mt-1 text-wrap white-space-normal">
+                    {{ goal.goal }}
+                </span>
             </v-btn>
             </v-col>
         </v-row>
     </div>
 
 </template>
+
+<style scoped>
+.white-space-normal {
+  white-space: normal !important;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+</style>

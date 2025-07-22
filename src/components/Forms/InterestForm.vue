@@ -49,28 +49,37 @@ function goBack() {
 
         <!-- Mood Buttons -->
         <v-row class="g-4">
-            <v-col
-            v-for="interest in interests"
-            :key="interest.id"
-            cols="6"
-            md="4"
-            class="d-flex justify-center"
-            >
-            <v-btn
-                :color="form.interests.includes(interest.id) ? 'red-lighten-5' : 'grey-lighten-3'"
-                class="py-2 px-2 d-flex flex-column align-center text-center"
-                @click="toggle(interest.id)"
-                rounded="pill"
-                block
-                elevation="0"
-                height="60"
-                style="min-width: 50%;"
-                :style="form.interests.includes(interest.id) ? 'border: 1px solid #f28b82;' : 'border: 1px solid transparent;'"
-            >
-                <span class="text-h4">{{ interest.emoji }}</span>
-                <span class="text-body-1 mt-1 text-capitalize">{{ interest.interest }}</span>
-            </v-btn>
-            </v-col>
+                <v-col
+                v-for="interest in interests"
+                :key="interest.id"
+                cols="6"
+                md="4"
+                class="d-flex justify-center"
+                >
+                    <v-btn
+                        :color="form.interests.includes(interest.id) ? 'red-lighten-5' : 'grey-lighten-3'"
+                        class="py-2 px-2 d-flex flex-column align-center text-center"
+                        @click="toggle(interest.id)"
+                        rounded="pill"
+                        block
+                        elevation="0"
+                        height="60"
+                        style="min-width: 50%;"
+                        :style="form.interests.includes(interest.id) ? 'border: 1px solid #f28b82;' : 'border: 1px solid transparent;'"
+                    >
+                        <span class="text-h6 text-sm-h5 text-md-h4">{{ interest.emoji }}</span>
+                        <span class="text-body-1 mt-1 text-capitalize text-wrap white-space-normal">{{ interest.interest }}</span>
+                    </v-btn>
+                </v-col>
         </v-row>
     </div>
 </template>
+
+<style scoped>
+.white-space-normal {
+  white-space: normal !important;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+</style>
