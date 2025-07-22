@@ -7,9 +7,16 @@ import GoalForm from './Forms/GoalForm.vue'
 const step = ref(1)
 
 const form = reactive({
-    mood: null,
+    moods: null,
     interests: [],
-    goal: null
+    goals: null
+})
+
+const isNextDisabled = computed(() => {
+  if (step.value === 1) return form.moods === null
+  if (step.value === 2) return form.interests.length === 0
+  if (step.value === 3) return form.goals === null
+  return false
 })
 </script>
 
@@ -26,11 +33,11 @@ const form = reactive({
             </div>
 
             <div v-else-if="step === 2">
-                <InterestForm :form="form"/>
+                <InterestForm :form="form" @back="step--"/>
             </div>
 
             <div v-else-if="step === 3">
-                <GoalForm :form="form"/>
+                <GoalForm :form="form" @back="step--"/>
             </div>
 
             <v-row justify="center" class="mb-6 px-6 px-md-12">
@@ -41,10 +48,11 @@ const form = reactive({
                         size="large" 
                         block
                         @click="step === 3 ? submit() : step++"
+                        :disabled="isNextDisabled"
                     >   
                         {{ step === 3 ? 'Find Match' : 'Next' }}
                     </v-btn>
-                </v-col>
+                </v-col>    
             </v-row>
         </v-card>
 </template>

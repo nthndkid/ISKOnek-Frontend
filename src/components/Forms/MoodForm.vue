@@ -5,6 +5,8 @@ const props = defineProps({
     form: Object
 })
 
+const emit = defineEmits(['back'])
+
 const router = useRouter()
 
 const moods = [
@@ -22,19 +24,8 @@ const moods = [
   { id: 12, mood: 'lonely', emoji: '😔' },
 ];
 
-
-
-function toggle(id){
-    const index = props.form.moods.indexOf(id)
-    if(index === -1){
-        props.form.moods.push(id)
-    } else {
-        props.form.moods.splice(index, 1)
-    }
-}
-
 function goBack() {
-  router.back()
+  router.push("/home")
 }
 
 </script>

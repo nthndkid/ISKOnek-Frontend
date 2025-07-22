@@ -5,6 +5,8 @@ const props = defineProps({
     form: Object
 })
 
+const emit = defineEmits(['back'])
+
 const router = useRouter()
 
 const goals = [
@@ -37,7 +39,7 @@ function goBack() {
         <v-row class="align-center mb-6">
             <!-- Back Button -->
             <v-col cols="auto">
-                <v-btn icon variant="text" @click="goBack">
+                <v-btn icon variant="text" @click="emit('back')">
                     <v-icon class="text-h4">mdi-arrow-left</v-icon>
                 </v-btn>
             </v-col>
