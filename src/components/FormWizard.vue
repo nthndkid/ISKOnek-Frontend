@@ -3,6 +3,7 @@ import { ref, reactive, computed } from 'vue'
 import MoodForm from './Forms/MoodForm.vue'
 import InterestForm from './Forms/InterestForm.vue'
 import GoalForm from './Forms/GoalForm.vue'
+import MatchPreview from './Forms/MatchPreview.vue'
 
 const step = ref(1)
 
@@ -18,6 +19,17 @@ const isNextDisabled = computed(() => {
   if (step.value === 3) return form.goals === null
   return false
 })
+
+const submitForm = () => {
+  // 1. Save to localStorage (mock)
+//   localStorage.setItem('userPreferences', JSON.stringify(form))
+
+  // 2. Optional: Send to API
+  // await axios.post('/api/match', form)
+
+  // 3. Navigate to match-finding screen
+  router.push('/find-match')
+}
 </script>
 
 <template>
@@ -40,17 +52,21 @@ const isNextDisabled = computed(() => {
                 <GoalForm :form="form" @back="step--"/>
             </div>
 
-            <v-row justify="center" class="mb-6 px-6 px-md-12">
+            <div v-else-if="step === 4">
+                <MatchPreview :form="form" @back="step--"/>
+            </div>
+
+            <v-row v-if="step < 4" justify="center" class="mb-6 px-6 px-md-12">
                 <v-col cols="12" md="12" class="text-center">
                     <v-btn 
                         color="red-darken-3" 
                         rounded="lg" 
                         size="large" 
                         block
-                        @click="step === 3 ? submit() : step++"
+                        @click="step === 4 ? submitForm() : step++"
                         :disabled="isNextDisabled"
                     >   
-                        {{ step === 3 ? 'Find Match' : 'Next' }}
+                        {{ step === 4 ? 'Find Match' : 'Next' }}
                     </v-btn>
                 </v-col>    
             </v-row>

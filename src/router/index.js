@@ -17,8 +17,8 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/match',
-      name: 'match',
+      path: '/pre-match',
+      name: 'prematch',
       component: MatchView,
     },
   ],

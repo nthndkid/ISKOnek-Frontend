@@ -1,5 +1,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
+import { formOptions } from '../../data/formOptions'
+
+const { interests } = formOptions()
 
 const props = defineProps({
     form: Object
@@ -8,27 +11,6 @@ const props = defineProps({
 const emit = defineEmits(['back'])
 
 const router = useRouter()
-
-const interests = [
-  { id: 1, interest: 'animals', emoji: '🐾' },
-  { id: 2, interest: 'music', emoji: '🎵' },
-  { id: 3, interest: 'sports', emoji: '🏀' },
-  { id: 4, interest: 'outdoor activities', emoji: '🏕️' },
-  { id: 5, interest: 'dancing', emoji: '💃' },
-  { id: 6, interest: 'food', emoji: '🍔' },
-  { id: 7, interest: 'gaming', emoji: '🎮' },
-  { id: 8, interest: 'gym and fitness', emoji: '🏋️' },
-  { id: 9, interest: 'art', emoji: '🎨' },
-  { id: 10, interest: 'book', emoji: '📚' },
-  { id: 11, interest: 'camping', emoji: '⛺' },
-  { id: 12, interest: 'architecture', emoji: '🏛️' },
-  { id: 13, interest: 'technology', emoji: '💻' },
-  { id: 14, interest: 'movie', emoji: '🎬' },
-  { id: 15, interest: 'writing', emoji: '✍️' },
-  { id: 16, interest: 'cooking', emoji: '🍳' },
-  { id: 17, interest: 'photography', emoji: '📸' },
-  { id: 18, interest: 'college life', emoji: '🎓' },
-];
 
 function toggle(id){
     const index = props.form.interests.indexOf(id)

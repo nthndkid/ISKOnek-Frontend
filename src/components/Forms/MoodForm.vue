@@ -1,28 +1,14 @@
 <script setup>
 import { useRouter } from 'vue-router'
+import { formOptions } from '../../data/formOptions'
 
 const props = defineProps({
     form: Object
 })
 
-const emit = defineEmits(['back'])
-
 const router = useRouter()
 
-const moods = [
-  { id: 1, mood: 'happy', emoji: '😄' },
-  { id: 2, mood: 'sad', emoji: '😢' },
-  { id: 3, mood: 'excited', emoji: '🤩' },
-  { id: 4, mood: 'calm', emoji: '😌' },
-  { id: 5, mood: 'sleepy', emoji: '😪' },
-  { id: 6, mood: 'angry', emoji: '😠' },
-  { id: 7, mood: 'stressed', emoji: '😫' },
-  { id: 8, mood: 'tired', emoji: '😴' },
-  { id: 9, mood: 'motivated', emoji: '🔥' },
-  { id: 10, mood: 'anxious', emoji: '😰' },
-  { id: 11, mood: 'bored', emoji: '🥱' },
-  { id: 12, mood: 'lonely', emoji: '😔' },
-];
+const { moods } = formOptions()
 
 function goBack() {
   router.push("/home")

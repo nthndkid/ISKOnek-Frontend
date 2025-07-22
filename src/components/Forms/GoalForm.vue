@@ -1,5 +1,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
+import { formOptions } from '../../data/formOptions'
+
+const { goals } = formOptions()
 
 const props = defineProps({
     form: Object
@@ -8,24 +11,6 @@ const props = defineProps({
 const emit = defineEmits(['back'])
 
 const router = useRouter()
-
-const goals = [
-  { id: 1, goal: 'find a study partner', emoji: '📚' },
-  { id: 2, goal: 'find a gaming buddy', emoji: '🎮' },
-  { id: 3, goal: 'someone willing to listen', emoji: '👂' },
-  { id: 4, goal: 'just want to explore', emoji: '🧭' },
-  { id: 5, goal: 'collaborate on ideas or projects', emoji: '🤝' },
-  { id: 6, goal: 'explore internship or career ideas', emoji: '💼' },
-  { id: 7, goal: 'share academic tips/resources', emoji: '📝' },
-  { id: 8, goal: 'practice public speaking or performance', emoji: '🎤' },
-  { id: 9, goal: 'make new friends', emoji: '🫂' },
-  { id: 10, goal: 'improve communication skills', emoji: '🗣️' },
-  { id: 11, goal: 'get peer support or advice', emoji: '💬' },
-  { id: 12, goal: 'network for future opportunities', emoji: '🌐' },
-  { id: 13, goal: 'join or start a club/group', emoji: '🏫' },
-  { id: 14, goal: 'build a startup or passion project', emoji: '🚀' }
-];
-
 
 function goBack() {
   router.back()

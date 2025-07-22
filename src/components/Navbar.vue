@@ -10,7 +10,7 @@
 
       <!-- Nav Links -->
       <v-btn text to="/">Home</v-btn>
-      <v-btn text to="/match">Match</v-btn>
+      <v-btn text to="/pre-match">Match</v-btn>
 
       <!-- Profile Dropdown -->
       <v-menu>
