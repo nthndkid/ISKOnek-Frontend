@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import MatchView from '../views/MatchView.vue'
 import MatchFindingView from '../views/MatchFindingView.vue'
-
+import TestView from '../views/TestView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,6 +26,11 @@ const router = createRouter({
       path: '/matching',
       name: 'matching',
       component: MatchFindingView,
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: TestView,
     },
   ],
 })

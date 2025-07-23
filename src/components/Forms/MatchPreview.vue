@@ -3,10 +3,13 @@ import { useRouter } from 'vue-router'
 import { formOptions } from '../../data/formOptions'
 import { computed, toRaw } from 'vue'
 import { useMatchStore } from '../../stores/matchStore'
+import { useAvatarStore } from '../../stores/avatarStore'
 
 const emit = defineEmits(['back'])
 
 const store = useMatchStore()
+
+const avatarStore = useAvatarStore()
 
 const router = useRouter()
 
@@ -58,7 +61,7 @@ const user = {
             <v-col class="d-flex flex-column align-center text-center">
                 <!-- User Avatar -->
                 <v-img
-                    :src="user.avatar"
+                    :src="avatarStore.avatar"
                     alt="avatar"
                     width="120"
                     height="120"
