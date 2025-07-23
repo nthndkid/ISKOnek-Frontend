@@ -87,17 +87,28 @@
 </template>
 
 <script setup>
+import axios from 'axios'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '../stores/userStore'
+import { useAvatarStore } from '../stores/avatarStore'
+import { generateAvatar } from '../utils/avatarGenerator'
 import Logo from '../components/icons/iskonek.svg'
 
 const router = useRouter()
+
+const userStore = useUserStore()
+
+const avatarStore = useAvatarStore()
+
+const url = import.meta.env.VITE_LAMBDA_API
+
 const form = ref({
   username: '',
   student_id: ''
 })
 
-const login = () => {
+const login = async () => {
   if (!form.value.student_id || !form.value.username) {
     alert('Please fill in both fields.')
     return
@@ -105,10 +116,26 @@ const login = () => {
 
   console.log(form.value)
 
-//   // Save to localStorage (mock auth)
-//   localStorage.setItem('user', JSON.stringify(form.value))
+  const avatar = generateAvatar() 
+  avatarStore.setAvatar(avatar)
 
-  // Navigate to dashboard
-  router.push('/home')
+  try{
+    const response = await axios.post(url, form.value, 
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'spring.cloud.function.definition': 'saveUser',
+      }
+    })
+
+    const user = response.data
+    userStore.setUser(user)
+    router.push('/home')
+
+  } catch (error) {
+    alert('Login failed')
+    console.error(error)
+  }
+
 }
 </script>
