@@ -1,4 +1,4 @@
-import './assets/base.css'
+import './assets/main.css'
 
 // Vuetify
 import 'vuetify/styles'

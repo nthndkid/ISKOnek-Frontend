@@ -4,12 +4,15 @@ import { formOptions } from '../../data/formOptions'
 import { computed, toRaw } from 'vue'
 import { useMatchStore } from '../../stores/matchStore'
 import { useAvatarStore } from '../../stores/avatarStore'
+import { useUserStore } from '../../stores/userStore'
 
 const emit = defineEmits(['back'])
 
 const store = useMatchStore()
 
 const avatarStore = useAvatarStore()
+
+const userStore = useUserStore()
 
 const router = useRouter()
 
@@ -71,8 +74,8 @@ const user = {
                 />
 
                 <!-- User Name -->
-                <span class="text-h6 font-weight-medium">
-                    {{ user.name }}
+                <span class="text-h6 font-weight-medium mt-2">
+                    @{{ userStore.user.username }}
                 </span>
             </v-col>
         </v-row>
