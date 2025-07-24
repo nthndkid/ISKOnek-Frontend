@@ -15,6 +15,7 @@
     "@dicebear/collection": "^9.2.3",
     "@dicebear/core": "^9.2.3",
     "@mdi/font": "^7.4.47",
+    "@vueuse/motion": "^3.0.3",
     "axios": "^1.10.0",
     "pinia": "^3.0.3",
     "vue": "^3.5.17",

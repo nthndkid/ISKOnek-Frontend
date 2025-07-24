@@ -6,6 +6,9 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+// Vue Motion
+import { MotionPlugin } from '@vueuse/motion'
+
 // Icons
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import '@mdi/font/css/materialdesignicons.css' 
@@ -33,6 +36,7 @@ const pinia = createPinia()
 
 app.use(pinia)
 app.use(vuetify)
+app.use(MotionPlugin)
 app.use(router) 
 app.mount('#app')
 

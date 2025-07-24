@@ -1,14 +1,14 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { formOptions } from '../../data/formOptions'
-import { computed, toRaw } from 'vue'
+import { computed, toRaw, ref } from 'vue'
 import { useMatchStore } from '../../stores/matchStore'
 import { useAvatarStore } from '../../stores/avatarStore'
 import { useUserStore } from '../../stores/userStore'
 
 const emit = defineEmits(['back'])
 
-const store = useMatchStore()
+const matchStore = useMatchStore()
 
 const avatarStore = useAvatarStore()
 
@@ -20,12 +20,36 @@ const props = defineProps({
     form: Object
 })
 
-const findMatch = () => {
-    console.log("Form Data Being Passed:", props.form)
-    store.setForm({...toRaw(props.form)})
-    router.push('/matching')
+// Matching Logic
+const isMatching = ref(false)
+const countdown = ref(30)
+let interval = null
+
+const startCountdown = () => {
+  isMatching.value = true
+  countdown.value = 30
+
+  interval = setInterval(() => {
+    countdown.value--
+    if (countdown.value <= 0) {
+      clearInterval(interval)
+      router.push('/matching')
+    }
+  }, 1000)
 }
 
+const cancelMatch = () => {
+  clearInterval(interval)
+  isMatching.value = false
+}
+
+const findMatch = () => {
+    console.log("Form Data Being Passed:", props.form)
+    matchStore.setForm({...toRaw(props.form)})
+    startCountdown()
+}
+
+// Data Logic
 const { moods, interests, goals } = formOptions()
 
 // Get full mood object
@@ -43,11 +67,6 @@ const selectedInterests = computed(() => {
   return interests.value.filter(i => props.form.interests.includes(i.id))
 })
 
-
-const user = {
-  name: '@iskoako',
-  avatar: 'https://api.dicebear.com/9.x/dylan/svg?seed=Felix'
-}
 </script>
 
 <template>
@@ -122,8 +141,8 @@ const user = {
         </v-row>
 
         <!-- Buttons -->
-        <v-row justify="center" class="px-6 px-md-12 mt-8">
-            <v-col cols="12" md="5" class="d-flex flex-column gap-4">
+        <v-row justify="center" class="px-6 px-md-12 mt-4">
+            <v-col v-if="!isMatching" cols="12" md="5" class="d-flex flex-column gap-4">
                 <!-- Find Match Button -->
                 <v-btn
                     color="blue-accent-3"
@@ -151,9 +170,48 @@ const user = {
                 </v-btn>
             </v-col>
 
-            <span class="text-body-2 text-center d-block mt-8">
-                    Ready to meet someone like you? Click <strong>Find Match</strong> to begin, or <strong>Go Back</strong> to make changes.
+            <v-col v-else cols="12" md="5" class="d-flex flex-column align-center text-center">
+                <!-- Circular Countdown -->
+                <v-progress-circular
+                    :model-value="(countdown / 30) * 100"
+                    :rotate="360"
+                    :size="100"
+                    :width="8"
+                    color="primary"
+                >
+                    <span class="text-h4 font-weight-bold text-primary">
+                    {{ countdown }}
+                    </span>
+                </v-progress-circular>
+
+                <span class="mt-4 text-subtitle-2 font-italic mb-4">
+                    Matching in progress...
                 </span>
+
+                <!-- Cancel Button -->
+                 <v-btn
+                    color="red-darken-3"
+                    size="large"
+                    rounded="pill"
+                    elevation="4"
+                    block
+                    class="py-7 px-6 hover-scale"
+                    @click="cancelMatch"
+                >
+                    Cancel Match
+                </v-btn>
+            </v-col>
+            
+            <!-- Message -->
+            <span v-if="!isMatching" class="text-body-2 text-center d-block mt-8">
+                Ready to meet someone like you? Click <strong>Find Match</strong> to begin, or <strong>Go Back</strong> to make changes.
+            </span>
+
+            <span v-else class="text-body-2 text-center d-block mt-8">
+                Searching for your perfect match... Please wait <strong>30 seconds</strong> while we queue you with someone compatible.<br>
+                If you change your mind, you can <strong>Cancel</strong> anytime.
+            </span>
+
         </v-row>
     </div>
 
@@ -166,5 +224,9 @@ const user = {
 
 .hover-scale:hover {
   transform: scale(1.02);
+}
+
+.v-progress-circular__overlay {
+  transition: stroke-dashoffset 0.6s ease;
 }
 </style>
