@@ -1,3 +1,63 @@
+<script setup>
+import axios from 'axios'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '../stores/userStore'
+import { useAvatarStore } from '../stores/avatarStore'
+import { generateAvatar } from '../utils/avatarGenerator'
+import Logo from '../components/icons/iskonek.svg'
+import LoadingOverlay from '../components/LoadingOverlay.vue'
+
+const loading = ref(false)
+
+const router = useRouter()
+
+const userStore = useUserStore()
+
+const avatarStore = useAvatarStore()
+
+const url = import.meta.env.VITE_LAMBDA_API
+
+const form = ref({
+  username: '',
+  student_id: ''
+})
+
+const login = async () => {
+  if (!form.value.student_id || !form.value.username) {
+    alert('Please fill in both fields.')
+    return
+  }
+
+  console.log(form.value)
+  loading.value = true
+
+  const avatar = generateAvatar() 
+  avatarStore.setAvatar(avatar)
+
+  try{
+    const response = await axios.post(url, form.value, 
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'spring.cloud.function.definition': 'saveUser',
+      }
+    })
+
+    const user = response.data
+    userStore.setUser(user)
+    router.push('/home')
+
+  } catch (error) {
+    alert('Login failed')
+    console.error(error)
+  } finally {
+    loading.value = false
+  }
+
+}
+</script>
+
 <template>
     <v-card elevation="0" class="pa-2" max-width="500" width="100%">
         <v-img
@@ -31,7 +91,8 @@
             variant="outlined"
             rounded="lg"  
             class="mb-2"
-            required>
+            required
+          >
           </v-text-field>
 
           <v-text-field
@@ -41,7 +102,8 @@
             variant="outlined"
             rounded="lg"  
             class="mb-2"
-            require>
+            require
+          >
             </v-text-field>
 
           <v-btn
@@ -50,8 +112,9 @@
             rounded="lg"
             size="x-large"
             class="text-none"
-            type="submit">
-            Get Started
+            type="submit"
+          >
+            <span>Get Started</span>
           </v-btn>
         </v-form>
 
@@ -83,59 +146,7 @@
             policies
           </a>.
         </v-card-text> -->
-      </v-card>
+    </v-card>
+
+    <LoadingOverlay :loading="loading" message="Getting things ready..." />
 </template>
-
-<script setup>
-import axios from 'axios'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useUserStore } from '../stores/userStore'
-import { useAvatarStore } from '../stores/avatarStore'
-import { generateAvatar } from '../utils/avatarGenerator'
-import Logo from '../components/icons/iskonek.svg'
-
-const router = useRouter()
-
-const userStore = useUserStore()
-
-const avatarStore = useAvatarStore()
-
-const url = import.meta.env.VITE_LAMBDA_API
-
-const form = ref({
-  username: '',
-  student_id: ''
-})
-
-const login = async () => {
-  if (!form.value.student_id || !form.value.username) {
-    alert('Please fill in both fields.')
-    return
-  }
-
-  console.log(form.value)
-
-  const avatar = generateAvatar() 
-  avatarStore.setAvatar(avatar)
-
-  try{
-    const response = await axios.post(url, form.value, 
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        'spring.cloud.function.definition': 'saveUser',
-      }
-    })
-
-    const user = response.data
-    userStore.setUser(user)
-    router.push('/home')
-
-  } catch (error) {
-    alert('Login failed')
-    console.error(error)
-  }
-
-}
-</script>
