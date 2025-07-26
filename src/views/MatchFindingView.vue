@@ -1,8 +1,7 @@
 <script setup>
-import FormWizard from '../components/FormWizard.vue';
+import Navbar from '../components/Navbar.vue';
 import Matchmaking from '../components/Matchmaking.vue';
 </script>
-
 
 <template>
   <Navbar />
