@@ -20,11 +20,11 @@ const url = import.meta.env.VITE_LAMBDA_API
 
 const form = ref({
   username: '',
-  student_id: ''
+  id: ''
 })
 
 const login = async () => {
-  if (!form.value.student_id || !form.value.username) {
+  if (!form.value.id || !form.value.username) {
     alert('Please fill in both fields.')
     return
   }
@@ -96,7 +96,7 @@ const login = async () => {
           </v-text-field>
 
           <v-text-field
-            v-model="form.student_id"
+            v-model="form.id"
             label="PUP Student ID"
             type="text"
             variant="outlined"
